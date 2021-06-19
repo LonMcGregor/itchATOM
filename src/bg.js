@@ -61,9 +61,9 @@ function extractEventsArray(body){
     div.innerHTML = body;
     const events = Array.from(div.querySelectorAll(".event_row"));
     return events.map(event => {
-        const meta1 = event.querySelector(".event_header .event_action .event_time"); // <a href="/event/6558640" title="2021-05-13 17:43:49" data-label="event_permlink" class="event_time">1 day ago</a>
-        const meta2 = event.querySelector(".event_header .event_action .event_source_user"); // <a href="https://cavesrd.itch.io" data-label="event_user" class="event_source_user">caves rd</a>
-        const meta3 = event.querySelector(".event_header .event_action strong"); // <strong>updated a beta</strong>
+        const meta1 = event.querySelector(".event_header .event_user_action .event_time"); // <a href="/event/6558640" title="2021-05-13 17:43:49" data-label="event_permlink" class="event_time">1 day ago</a>
+        const meta2 = event.querySelector(".event_header .event_user_action .event_source_user"); // <a href="https://cavesrd.itch.io" data-label="event_user" class="event_source_user">caves rd</a>
+        const meta3 = event.querySelector(".event_header .event_user_action strong"); // <strong>updated a beta</strong>
         const preview = event.querySelector(".game_thumb"); // <div class="game_thumb" data-background_image="https://img.itch.zone/aW1nLzU4MDY0NzcucG5n/315x250%23c/t3djto.png" style="background-color:#282828;"></div>
         const sumry = event.querySelector(".event_main_content"); // html
         return {
