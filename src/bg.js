@@ -50,10 +50,10 @@ function cleanHTML(raw){
 }
 
 function makeSummary(meta2, meta3, preview, raw){
-    return `<h1>${meta2.innerText} ${meta3.innerText}</h1>
-    <img src="${preview.getAttribute("data-background_image")}" />
-    <br />
-    ` + raw.innerHTML;
+    return `<h1>${meta2.innerText} ${meta3.innerText}</h1>` +
+    (preview ? preview.outerHTML : ``)
+    + `<br />
+    ` + raw.innerHTML.replaceAll(`<span class="star icon-star"></span>`,`⭐`);
 }
 
 function extractEventsArray(body){
@@ -64,7 +64,7 @@ function extractEventsArray(body){
         const meta1 = event.querySelector(".event_header .event_user_action .event_time"); // <a href="/event/6558640" title="2021-05-13 17:43:49" data-label="event_permlink" class="event_time">1 day ago</a>
         const meta2 = event.querySelector(".event_header .event_user_action .event_source_user"); // <a href="https://cavesrd.itch.io" data-label="event_user" class="event_source_user">caves rd</a>
         const meta3 = event.querySelector(".event_header .event_user_action strong"); // <strong>updated a beta</strong>
-        const preview = event.querySelector(".game_thumb"); // <div class="game_thumb" data-background_image="https://img.itch.zone/aW1nLzU4MDY0NzcucG5n/315x250%23c/t3djto.png" style="background-color:#282828;"></div>
+        const preview = event.querySelector(".game_thumb"); // <div style="background-color:#9e9aef;" class="game_thumb"><a class="thumb_link game_link" data-label="game:1684116:thumb" tabindex="-1" data-action="game_grid" href="https://brianna-lei.itch.io/butterfly-soup-2"><img data-lazy_src="https://img.itch.zone/aW1nLzEwMzkxODE4LnBuZw==/315x250%23c/X2RMfG.png" class="lazy_loaded" height="250" width="315" src="https://img.itch.zone/aW1nLzEwMzkxODE4LnBuZw==/315x250%23c/X2RMfG.png"></a><div class="game_cell_tools"><a href="/g/brianna-lei/butterfly-soup-2/add-to-collection?source=event" class="action_btn add_to_collection_btn"><span class="icon icon-playlist_add"></span>Add to collection</a></div></div>
         const sumry = event.querySelector(".event_main_content"); // html
         return {
             id: "event"+meta1.href.match(/\d+/)[0],
